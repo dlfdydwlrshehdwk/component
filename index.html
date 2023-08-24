@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *::before,
+    *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: inherit;
+    }
+    :root {
+        --primary-light: #8abdff;
+        --primary: #6d5dfc;
+        --primary-dark: #5b0eeb;
+        --white: #ffffff;
+        --greyLight-1: #e4ebf5;
+        --greyLight-2: #c8d0e7;
+        --greyLight-3: #bec8e4;
+        --greyDark: #9baacf;
+    }
+    /*  SWITCH  */
+
+    /* 스위치 겉박스역할 */
+    .switch {
+    grid-column: 1/2;
+    display: grid;
+    grid-template-columns: repeat(2, -webkit-min-content);
+    grid-template-columns: repeat(2, min-content);
+    grid-gap: 3rem;
+    justify-self: center;
+    }
+    /* input 자체는 dn시키고 label을 꾸며줄거임 가상효과이용해서 */
+    .switch input {
+    display: none;
+    }
+    /* 스위치 길이 */
+    .switch__1, .switch__2 {
+    width: 6rem;
+    }
+    /* 라벨이 흰색배경 ::before이 보라배경 ::after가 동구라미 */
+    .switch__1 label, .switch__2 label {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 3rem;
+    box-shadow: 0.3rem 0.3rem 0.6rem var(--greyLight-2), -0.2rem -0.2rem 0.5rem var(--white);
+    background: rgba(255, 255, 255, 0);
+    position: relative;
+    cursor: pointer;
+    border-radius: 1.6rem;
+    }
+    /* 가상요소 회색똥그라미 */
+    .switch__1 label::after, .switch__2 label::after {
+    content: "";
+    position: absolute;
+    left: 0.4rem;
+    width: 2.1rem;
+    height: 2.1rem;
+    border-radius: 50%;
+    background: var(--greyDark);
+    transition: all 0.4s ease;
+    }
+    /* 가상요소 보라색박스 선셋팅 */
+    .switch__1 label::before, .switch__2 label::before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(330deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-light) 100%);
+    opacity: 0;
+    transition: all 0.4s ease;
+    }
+    /* 체크박스 체크되면 보라박스 투명도변경 */
+    .switch input:checked ~ label::before {
+    opacity: 1;
+    }
+    /* 체크박스 체크되면 회색똥그라미 색상변경 + 위치이동 */
+    .switch input:checked ~ label::after {
+    left: 57%;
+    background: var(--greyLight-1);
+    }
+
+</style>
+<body>
+    <div class="switch">
+        <div class="switch__1">
+          <input id="switch-1" type="checkbox">
+          <label for="switch-1"></label>
+        </div>
+        
+        <div class="switch__2">
+          <input id="switch-2" type="checkbox" checked>
+          <label for="switch-2"></label>
+        </div>
+      </div>
+</body>
+</html>
